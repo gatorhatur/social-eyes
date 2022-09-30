@@ -15,7 +15,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-ey
   useUnifiedTopology: true
 });
 
-
-mongoose.set('debug', true);
+mongoose
+    .set('debug', true)
+    .set('toJSON', {virtuals: true});
 
 app.listen(PORT, () => console.log(`Connected on localhost:${PORT}`));
