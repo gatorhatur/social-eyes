@@ -1,0 +1,24 @@
+{
+  "name": "social-eyes-api",
+  "version": "1.0.0",
+  "description": "Backend API to support connection with MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gatorhatur/social-eyes.git"
+  },
+  "author": "Brandon Davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gatorhatur/social-eyes/issues"
+  },
+  "homepage": "https://github.com/gatorhatur/social-eyes#readme",
+  "dependencies": {
+    "dayjs": "^1.11.5",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.2"
+  }
+}
