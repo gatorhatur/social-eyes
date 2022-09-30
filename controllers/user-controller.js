@@ -45,9 +45,29 @@ module.exports = {
     },
     // /api/users/:userId/friends/:friendId
     addFriend({ params }, res) {
-        
+        User.findByIdAndUpdate(
+            { _id: params.userId },
+            { $addToSet: { friends: params.friendId } },
+            { new: true }
+        )
+            .then(userData => {
+                !userData
+                    ? res.status(404).json({ message: 'Failed to Add Friend: No user foudn with this id!' })
+                    : res.json(userData);
+            })
+            .catch(err => res.json(err));
     },
     deleteFriend({ params }, res) {
-        
+        User.findByIdAndUpdate(
+            { _id: params.userId },
+            { $pull: { friends: params.friendId } },
+            { new: true }
+        )
+            .then(userData => {
+                !userData
+                    ? res.status(404).json({ message: 'Failed to Add Friend: No user foudn with this id!' })
+                    : res.json(userData);
+            })
+            .catch(err => res.json(err));
     }
 }
