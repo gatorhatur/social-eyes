@@ -17,6 +17,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-ey
 
 mongoose
     .set('debug', true)
-    .set('toJSON', {virtuals: true});
+    .set('toJSON', {virtuals: true, getters: true});
 
 app.listen(PORT, () => console.log(`Connected on localhost:${PORT}`));
