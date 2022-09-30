@@ -3,25 +3,31 @@ const { User } = require('../models');
 module.exports = {
     // /api/users
     getAllUsers(req,res) {
-        User.find({})
-            .populate('thoughts','friends')
+        User.find()
+            //.populate('thoughts')
+            .populate('friends')
             .then(users => res.json(users))
-            .catch(err => res.status(500).json(err));
+            .catch(err => {
+                console.log(err)
+                res.status(500).json(err)
+            })
+        
     },
     getUser({ params }, res) {
         User.findOne({ _id: params.userId })
-            .populate('thoughts', 'friends')
+            //.populate('thoughts')
+            .populate('friends')
             .then(userData => {
                 !userData
                     ? res.status(404).json({ message: 'No user found with this id!' })
                     : res.json(userData);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.json(err))
     },
     createUser({ body }, res) {
         User.create(body)
             .then(userData => res.json(userData))
-            .catch(err => res.json(err));
+            .catch(err => res.json(err))
     },
     updateUser({ params, body }, res) {
         //if a friend was altered
@@ -31,7 +37,7 @@ module.exports = {
                     ? res.status(404).json({ message: 'No user found with this id!' })
                     : res.json(userData);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.json(err))
     },
     deleteUser({ params }, res) {
         //post delete will need to remove from other friends list

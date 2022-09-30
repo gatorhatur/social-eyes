@@ -13,14 +13,14 @@ const userSchema = new mongoose.Schema({
         unique: true,
         //validate here
     },
-    thoughts: {
+    thoughts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'thought'
-    },
-    friends: {
+    }],
+    friends: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
-    }
+    }]
 })
 
 userSchema.virtual('friendCount').get(function () {
