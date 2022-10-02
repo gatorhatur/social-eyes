@@ -10,6 +10,8 @@ const replySchema = new mongoose.Schema({
         type: String,
         required: true,
         //280 character max validation
+        max: 280,
+        min: 1
     },
     username: {
         type: String,
@@ -18,7 +20,7 @@ const replySchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: createdAtVal => dayjs(createdAtVal)
+        get: (createdAtVal) => dayjs(createdAtVal).format('MM/DD/YYYY hh:mmA')
     }
 })
 
@@ -27,11 +29,13 @@ const thoughtSchema = new mongoose.Schema({
         type: String,
         required: true,
         //validate characters
+        max: 280,
+        min: 1
     },
     createdAt: {
         type: Date,
         default: Date.now,
-        get: createdAtVal => dayjs(createdAtVal)
+        get: createdAtVal => dayjs(createdAtVal).format('MM/DD/YYYY hh:mmA')
     },
     username: {
         type: String,

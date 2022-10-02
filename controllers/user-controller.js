@@ -4,7 +4,7 @@ module.exports = {
     // /api/users
     getAllUsers(req,res) {
         User.find()
-            //.populate('thoughts')
+            .populate('thoughts')
             .populate('friends')
             .then(users => res.json(users))
             .catch(err => {
@@ -15,7 +15,7 @@ module.exports = {
     },
     getUser({ params }, res) {
         User.findOne({ _id: params.userId })
-            //.populate('thoughts')
+            .populate('thoughts')
             .populate('friends')
             .then(userData => {
                 !userData
