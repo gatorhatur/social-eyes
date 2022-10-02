@@ -29,15 +29,15 @@ module.exports = {
         const thought = await models.Thought.create(body)
         
         if (!thought) {
-            res.status(500).json({ message: 'Somethign went wrong' })
+            res.status(500).json({ message: 'Something went wrong' })
             return
         }
         
         user.updateOne({ $push: { thoughts: thought._id } })
-            .then(userData => res.json({ message:'success',thoughtData }))
+            .then(userData => res.json({ message:'success',userData }))
             .catch(err => {
                 console.log(err);
-                res.status(500).json({ message: 'Somethign went wrong' })
+                res.status(500).json({ message: 'Something went wrong' })
             });
         
     },
