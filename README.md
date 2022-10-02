@@ -49,6 +49,8 @@ DELETE /api/thoughts/:thoughtId - Delete thought by id<br>
 POST /api/thoughts/:thoughtId/reactions - Create reaction to thought by id<br>
 DELETE /api/thoughts/:thoughtId/reactions/:reactionId - Delete reaction <br>
 
+[Insomnia Sample](/snapshot.JPG)
+
 ## Links
 
 [View Demo](https://drive.google.com/file/d/1Qjv9wFkN7YgJcVufE9BrqCHjFW7SqmZY/view)<br>
