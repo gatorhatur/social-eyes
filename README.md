@@ -53,5 +53,5 @@ DELETE /api/thoughts/:thoughtId/reactions/:reactionId - Delete reaction <br>
 
 ## Links
 
-[View Demo](https://drive.google.com/file/d/1Qjv9wFkN7YgJcVufE9BrqCHjFW7SqmZY/view)<br>
-[Checkout the Code](https://github.com/gatorhatur/ecommerce-backend)
+[View Demo](https://drive.google.com/file/d/16lCxsoWMomarv1JJ98shtwZKekiMfOz1/view)<br>
+[Checkout the Code](https://github.com/gatorhatur/social-eyes)
