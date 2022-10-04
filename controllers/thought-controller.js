@@ -1,14 +1,14 @@
-const models = require('../models');
+const {User, Thought} = require('../models');
 
 module.exports = {
     // /api/thoughts
     getAllThoughts(req, res) {
-        models.Thought.find()
+        Thought.find()
             .then(thoughtData => res.json({ message:'success',thoughtData }))
             .catch(err => res.status(500).json(err));
     },
     getThoughtById({ params }, res) {
-        models.Thought.findById(params.thoughtId)
+        Thought.findById(params.thoughtId)
             .then(thoughtData =>
                 !thoughtData
                     ? res.status(404).json({ message: "Invalid thought id!" })
@@ -19,14 +19,14 @@ module.exports = {
     },
     async createThought({ body }, res) {
 
-        const user = await models.User.findById(body.userId)
+        const user = await User.findById(body.userId)
 
         if (!user) {
             res.status(404).json({ message: 'Invalid user id' });
             return;
         }
 
-        const thought = await models.Thought.create(body)
+        const thought = await Thought.create(body)
         
         if (!thought) {
             res.status(500).json({ message: 'Something went wrong' })
@@ -42,7 +42,7 @@ module.exports = {
         
     },
     updateThought({ params, body }, res) {
-        models.Thought.findByIdAndUpdate(
+        Thought.findByIdAndUpdate(
             params.thoughtId,
             { $set: body },
             { new: true }
@@ -54,7 +54,7 @@ module.exports = {
             )
     },
     deleteThought({ params }, res) {
-        models.Thought.findByIdAndDelete(params.thoughtId)
+        Thought.findByIdAndDelete(params.thoughtId)
             .then(thoughtData => {
                 console.log(thoughtData);
                 if (!thoughtData) {
@@ -68,7 +68,7 @@ module.exports = {
                 if (stop) {
                     return
                 }
-                return models.User.findOneAndUpdate(
+                return User.findOneAndUpdate(
                     { thoughts: thoughtData._id },
                     { $pull: { comments: thoughtData._id } },
                     { new: true }
@@ -87,7 +87,7 @@ module.exports = {
     },
     // /api/thoughts/:thoughtId/reactions
     addReaction({ params, body }, res) {
-        models.Thought.findByIdAndUpdate(
+        Thought.findByIdAndUpdate(
             params.thoughtId,
             { $push: { reactions: body } },
             { new: true }
@@ -100,7 +100,7 @@ module.exports = {
     },
         // /api/thoughts/:thoughtId/reactions/:reactionId
     deleteReaction({ params }, res) {
-        models.Thought.findByIdAndUpdate(
+        Thought.findByIdAndUpdate(
             params.thoughtId,
             { $pull: { reactions: { reactionId: params.reactionId } } },
             { new: true }

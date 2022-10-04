@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 module.exports = {
     // /api/users
@@ -41,7 +41,20 @@ module.exports = {
     },
     deleteUser({ params }, res) {
         //post delete will need to remove from other friends list
-        //will need to cascade thoughts out
+        User.updateMany({ friends: {_id: params.userId}  },
+            { $pull: { friends: { _id: params.userId } } },
+            { new: true })
+        
+        User.findById(params.userId)
+            .then(userData => Thought.deleteMany({ username: userData.username }))
+        
+        User.findByIdAndDelete(params.userId)
+            .then(userData =>
+                !userData
+                    ? res.status(404).json({ message: 'No user found with this id!' })
+                    : res.json(userData)
+            )
+            .catch(err => res.json(err));
     },
     // /api/users/:userId/friends/:friendId
     addFriend({ params }, res) {
