@@ -4,8 +4,8 @@ module.exports = {
     // /api/users
     getAllUsers(req,res) {
         User.find()
-            .populate('thoughts')
-            .populate('friends')
+            .populate({path: 'friends', select: '_id username email friends'})
+            .populate({path: 'thoughts', select: '_id thoughtText createdAt reactions'})
             .then(users => res.json(users))
             .catch(err => {
                 console.log(err)
